@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Diff</title>
+</head>
+<body>
+  <script>
+    let arr1 = [1,2,3]      // 老数据
+    let arr2 = [2,1,4,5]      // 新数据
+
+    // 数据没变 ——原始velement直接拿过来
+    // 数据删了 ——原始velement留着备用
+    // 数据添加 ——优先使用备用velement,创建新的
+
+    let result = []
+    // js的数组性能不高,先指定length目的提高性能
+    result.length = arr2.length
+
+
+
+    arr2.forEach((item,index)=>{
+      let n = arr1.indexOf(item)
+
+      if(n!=-1){
+        console.log(index,'找到原始element',n)
+        result[index] = arr1[n]
+        arr1.splice(n,1)
+      }else{
+        console.log(index,'发现新数据')
+        result[index]=null
+      }
+    })
+
+    result.forEach((item,index)=>{
+      if(item!=null) return
+
+      if(arr1.length>0){
+        console.log(index,'拿已有备用元素')
+        result[index] = arr1.pop()
+      }else{
+        console.log(index,'全新数据')
+        result[index] = 'new'
+      }
+    })
+
+
+    console.log(result,arr2,arr1)
+  </script>
+</body>
+</html>

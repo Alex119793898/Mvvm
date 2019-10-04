@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+// 思路: 第一步 找到字符串里的单引号包裹的字符串
+    // let str = "12+5+'abd\\'fsd'+dfsadfsd"
+    // console.log(str)
+    // let n = str.indexOf("'")
+
+    // let m = n+1
+    // while(1){
+    //   m = str.indexOf("'",m)
+    //   if(m==-1){
+    //     throw new Error('引号没有配对')
+    //   }
+
+    //   if(str[m-1] == '\\'){
+    //     m++
+    //     continue
+    //   }else{
+    //     break
+    //   }
+    // }
+
+
+    // console.log(n,m)
+    // console.log(str.substring(n+1,m))
+
+
+// 思路: 第二步 找到字符串里的单引号或者双引号包裹的字符串
+
+    // let str = "12+5+'abd\\'fsd'+dfsadfsd"
+    // let str = 'dhfjd+"d\\"kf\\"999j"+hdjf"d\\"kf\\"999j"'
+    // let n = str.search(/'|"/)
+
+    //   let m = n+1
+    //   while(1){
+    //     m = str.indexOf(str[n],m)
+    //     if(m==-1){
+    //       throw new Error('引号没有配对')
+    //     }
+
+    //     if(str[m-1] == '\\'){
+    //       m++;
+    //       continue;
+    //     }else{
+    //       break;
+    //     }
+    //   }
+
+    //   console.log(n,m)
+    //   console.log(str.substring(n+1,m))
+
+
+// 思路: 第三步 用【while循环】找到字符串里【所有的】的单引号或者双引号包裹的字符串 并放进数组
+
+    // let str = "12+5+'abd\\'fsd'+dfsadfsd"
+    // let str = 'dhfjd+"d\\"kf\\"999j"+hdjf"d\\"kf\\"999j"'
+
+    // let arr = []
+
+    // while(1){
+    //   let n = str.search(/'|"/)
+    //   if(n==-1)break
+
+    //   let m = n+1
+    //   while(1){
+    //     m = str.indexOf(str[n],m)
+    //     if(m==-1){
+    //       throw new Error('引号没有配对')
+    //     }
+
+    //     if(str[m-1] == '\\'){
+    //       m++;
+    //       continue;
+    //     }else{
+    //       break;
+    //     }
+    //   }
+
+    //   arr.push(str.substring(n+1,m))
+    //   str = str.substring(m+1)
+    // }
+
+    // console.log(arr)
+
+
+// 思路: 第四步 把单引号或者双引号包裹的字符串 和 除了字符串的 其他表达式部分 也放进数组
+    let str = 'dhfjd+"d\\"kf\\"999j"+hdjf"d\\"kf\\"999j"dffd'
+
+    let arr = []
+
+    while(1){
+      let n = str.search(/'|"/)
+      if(n==-1){
+
+        // 关键2:在所有字符串都找到 循环结束前 把最后剩余的表达式 push进arr
+        arr.push({expr:str})
+        break
+      }
+
+      let m = n+1
+      while(1){
+        m = str.indexOf(str[n],m)
+        if(m==-1){
+          throw new Error('引号没有配对')
+        }
+
+        if(str[m-1] == '\\'){
+          m++;
+          continue;
+        }else{
+          break;
+        }
+      }
+      // 关键1:把字符串以外部分push进arr
+      arr.push({expr:str.substring(0,n)})
+      arr.push(str.substring(n+1,m))
+      str = str.substring(m+1)
+    }
+
+    console.log(arr)
+
+
+  </script>
+</body>
+</html>

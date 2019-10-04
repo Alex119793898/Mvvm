@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<!-- <style>
+  .xxx{
+    width: 500px; height: 120px;
+    margin: 0 auto;
+    background-color: orange;
+  }
+  .xx{
+    width: 300px; height: 120px;
+    margin: 0 auto;
+    background-color: purple;
+  }
+  .x{
+    width: 100px; height: 120px;
+    margin: 0 auto;
+    background-color: #e8e8e8;
+  }
+</style> -->
+<body>
+
+  <!-- 增加内容:实现$on $emit功能
+    1.写好eventQueue类
+
+    2.index.js中配合eventQueue类部分:
+      a.在mounted阶段绑定事件index.js中(22行)
+
+      b.触发事件index.js中(10行)
+
+    3.vue.js中配合eventQueue类部分:
+      a.让vue.js的Vue 和 vnode.js的Vnode继承eventQueue类
+        分别在Vue类和Vnode类写好super()
+      b.在vue.js中(47-49行)
+          给_staticData添加$on / $emit / $refs
+      c.给vue.js添加mouted方法
+          ⓵vue.js中(35行):this.mounted = options.mounted
+          ⓶vue.js中(104行):this.mounted && this.mounted.call(this._data)
+            ➊通过call指定this为当前this实例的_data
+            ➋index.js中mouted调用的时this为this._data
+            ➌$on / $emit / $refs已经添加到_staticData中所以可以通过this调用$emit(index.js中10行)
+
+    4.找到正确的具有ref属性的组件
+      a.vue.js中(155-161行)
+      b.vue.js中(220-223行)
+
+   -->
+  <div class="box aaa" id="root">
+   <cmp1 ref="ccc"></cmp1>
+  </div>
+  <script src="./bundle.js"></script>
+</body>
+</html>
